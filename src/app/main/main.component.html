@@ -1,0 +1,33 @@
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<h1 class="maintxt" routerLink="/">ToDO Lists</h1>
+<div class="maindiv">
+    <div *ngFor="let task of tasks; index as i" class="condiv row">
+        <input type="checkbox" class="check" [(ngModel)]="task.checked" [checked]="saveTasks()">
+        <input class="task" [ngClass]="{'strikeClass': task.checked}" value="{{ task.title }}"
+            [(ngModel)]="tasks[i].title" [readOnly]="task.readonly" (keyup.enter)="modifyTask(i,task.title)" (keyup.delete)="removeTask(i)">
+        <button class="btn" *ngIf="!btnTrigger[i]" (click)="changedRead(i)"><span
+                class="material-symbols-outlined btnEdit">
+                edit
+            </span></button>
+        <button class="btn btnDone" *ngIf="btnTrigger[i]" (click)="modifyTask(i, task.title)"><span class="material-symbols-outlined">
+                done
+            </span></button>
+        <button class="btn" (click)="removeTask(i)"><span class="material-symbols-outlined btnDelete">
+                delete
+            </span></button>
+    </div>
+    <div class="newTaskDiv">
+        <input type="text" [(ngModel)]="newTask" class="inputtxt" placeholder="Add New Task"
+            (keyup.enter)="addTask(newTask)">
+        <button class="btn" (click)="addTask(newTask);"><span class="material-symbols-outlined">
+                add_box
+            </span></button>
+    </div>
+</div>
